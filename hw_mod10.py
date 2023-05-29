@@ -68,11 +68,34 @@ def phone_add(name, phone):
 def phone_change(name, phone, newphone):
     # the new phone number of an existing contact
     if name in dict_users_phone.keys():
-        print(dict_users_phone.get(name).showphone())
+        for ph in dict_users_phone.get(name).phone:
+            if ph == Phone(phone):
+                print(f'!!!!!{ph.phone}')
+                print(type(ph))
+                ph.phone = newphone
         # dict_users_phone.get(name).editphone(Phone(phone), newphone)
         return f'for {name} change number to {phone}'
     else:
         return f'and user {name} not exist'
+
+
+@input_error
+def phone_del(name, phone):
+    # the new phone number of an existing contact
+    if name in dict_users_phone.keys():
+        i = 0
+        result = ''
+        for ph in dict_users_phone.get(name).phone:
+            if ph == Phone(phone):
+                result = f'{dict_users_phone.get(name).phone.pop(i).phone}'
+                i += 1
+                return f'for {name} delete ' + result
+        if not result:
+            return f'for {name} not found phone {phone}'
+
+    else:
+        return f'user {name} not exist'
+
 
 
 @input_error
@@ -102,7 +125,8 @@ dict_commands = {"hello": hello,
                  "add": phone_add,
                  "change": phone_change,
                  "phone": show_phone,
-                 "show": show_all,
+                 "show": show_all, 
+                 "del": phone_del,
                  "exit": exit,
                  "goodbye": exit,
                  "close": exit,
