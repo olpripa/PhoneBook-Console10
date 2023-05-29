@@ -66,10 +66,9 @@ class Record(Field):
 
         if phone in self.phone:
             self.phone.remove(phone)
-            print(
-                f'Phone: {phone.phone} delete from list of User {self.name.name}')
+            return f'Phone: {phone.phone} delete from list of User {self.name.name}'
         else:
-            print(f'User {self.name.name} not have phone: {phone.phone}')
+            return f'User {self.name.name} not have phone: {phone.phone}'
 
     # function edit Phone from Phone list of User
     def editphone(self, phone, new_phone):  # phone --> object class Phone
@@ -77,10 +76,9 @@ class Record(Field):
         if phone in self.phone:
             # self.phone.remove(phone)
             phone.phone = new_phone
-            print(
-                f'Phone: {phone.phone} change in list of User {self.name.name}')
+            return f'Phone: {phone.phone} change in list of User {self.name.name}'
         else:
-            print(f'User {self.name.name} not have phone: {phone.phone}')
+            return f'User {self.name.name} not have phone: {phone.phone}'
 
 
 class AdressBook(UserDict):
