@@ -21,10 +21,13 @@
 from classes import *
 from start import ab_start
 
+
 class MoreArgument(Exception):
     pass
 
+
 dict_users_phone = AdressBook()
+
 
 def input_error(func):
     # decorator
@@ -55,7 +58,8 @@ def phone_add(name, phone):
     # adds a new contact to the dictionary
 
     if name in dict_users_phone.keys():
-        print(f'User {name} - exist with phone number {dict_users_phone.get(name).showphone()}')
+        print(
+            f'User {name} - exist with phone number {dict_users_phone.get(name).showphone()}')
         return dict_users_phone[name].addphone(Phone(phone))
     else:
         r = Record(name, Phone(phone))
@@ -67,9 +71,13 @@ def phone_add(name, phone):
 def phone_change(name, phone, newphone):
     # the new phone number of an existing contact
     if name in dict_users_phone.keys():
-        print(type(dict_users_phone.get(name)))
-        print(type(dict_users_phone.get(name).phone))
-        # return dict_users_phone.get(name).editphone(dict_users_phone.get(name).phone, newphone)
+        for ph in dict_users_phone.get(name).phone:
+            if ph == Phone(phone):
+                print(f'!!!!!{ph.phone}')
+                print(type(ph))
+                ph.phone = newphone
+        # dict_users_phone.get(name).editphone(Phone(phone), newphone)
+        return f'for {name} change number to {phone}'
     else:
         return f'and user {name} not exist'
 
@@ -87,9 +95,9 @@ def phone_del(name, phone):
                 return f'for {name} delete ' + result
         if not result:
             return f'for {name} not found phone {phone}'
+
     else:
         return f'user {name} not exist'
-
 
 
 @input_error
@@ -119,7 +127,7 @@ dict_commands = {"hello": hello,
                  "add": phone_add,
                  "change": phone_change,
                  "phone": show_phone,
-                 "show": show_all, 
+                 "show": show_all,
                  "del": phone_del,
                  "exit": exit,
                  "goodbye": exit,
