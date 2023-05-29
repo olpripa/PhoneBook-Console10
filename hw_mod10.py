@@ -19,14 +19,12 @@
         compatible_formats
 """
 from utility import *
-
+from start import ab_start
 
 class MoreArgument(Exception):
     pass
 
-
 dict_users_phone = AdressBook()
-
 
 def input_error(func):
     # decorator
@@ -70,16 +68,11 @@ def phone_add(name, phone):
 def phone_change(name, phone, newphone):
     # the new phone number of an existing contact
     if name in dict_users_phone.keys():
-        print(
-            f'User {name} - exist with phone number {dict_users_phone.get(name).showphone()}')
-        dict_users_phone.get(name).editphone(Phone(phone), newphone)
+        print(dict_users_phone.get(name).showphone())
+        # dict_users_phone.get(name).editphone(Phone(phone), newphone)
         return f'for {name} change number to {phone}'
     else:
-        r = Record(name, Phone(phone))
-        dict_users_phone.add(r)
-        return f'add to list {name}, {phone}'
-
-    dict_users_phone[name] = phone
+        return f'and user {name} not exist'
 
 
 @input_error
@@ -123,6 +116,8 @@ def action(func,  dictionary,  default="NO COMMAND"):
 
 
 def main():
+    global dict_users_phone
+    dict_users_phone = ab_start()
     arg = ''
     print(f'main-code в {__name__} виконується тут')
 

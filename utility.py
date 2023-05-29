@@ -12,12 +12,18 @@ class Name(Field):
 
 class Phone(Field):
 
-    def __init__(self, value):
+    def __init__(self, value) -> None:
         self.phone = value
         # self.sanitize()
 
     def __setattr__(self, name, value):
         self.__dict__[name] = self.sanitize(value)
+
+    def __eq__(self, other):
+        if hasattr(other, 'phone'):
+            return self.phone == other.phone
+        return self.value == other
+
 
     def sanitize(self, phone):
         phone = (
